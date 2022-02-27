@@ -1,0 +1,32 @@
+{
+  "name": "gps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "dev": "babel . --ignore node_modules,build -d build --relative --watch --source-maps inline",
+    "build": "babel . --ignore node_modules,build -d build --relative --minified --no-comments --delete-dir-on-start",
+    "pretty": "prettier --write ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.2.0",
+    "gps": "^0.6.0",
+    "laravel-echo": "^1.11.3",
+    "log4js": "^6.4.1",
+    "node-args": "^2.1.8",
+    "pusher-js": "^7.0.3",
+    "serialport": "^9.2.8",
+    "socket.io-client": "^4.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "prettier": "^2.5.1"
+  }
+}

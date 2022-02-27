@@ -1,0 +1,14 @@
+{
+    "presets": [
+        ["@babel/preset-env", {
+            "targets": {
+                "esmodules": false,
+                "node": "11"
+            },
+            "modules": "commonjs"
+        }]
+    ],
+    "plugins": [
+        ["module-resolver", {"root": ["."]}]
+    ]
+}
