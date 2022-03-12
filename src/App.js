@@ -117,6 +117,10 @@ export class App {
 		bootNext();
 	}
 
+	isDev() {
+		return process.env.APP_ENV !== "production";
+	}
+
 	get uid() {
 		return this._uid;
 	}
