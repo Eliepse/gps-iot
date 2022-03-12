@@ -3,7 +3,6 @@ import args from "node-args";
 import {App} from 'src/App';
 import Axios from "axios";
 import fs from "fs";
-import {ConfigsService} from 'src/services/ConfigsService';
 import {AuthenticationService} from 'src/services/AuthenticationService';
 import {WebsocketsService} from 'src/services/WebsocketsService';
 import dotenv from 'dotenv';
@@ -58,7 +57,6 @@ if (!args.token) {
 	const app = new App(process.env.TRACKER_UID, token);
 	app.setServices(
 		ApiService,
-		ConfigsService,
 		AuthenticationService,
 		WebsocketsService,
 		GPSTrackingService,

@@ -21,6 +21,15 @@ export class AuthenticationService extends Service {
 		return this._token;
 	}
 
+
+	}
+
+	/**
+	 * @deprecated
+	 * @param channel
+	 * @param options
+	 * @returns {{authorize: authorize}}
+	 */
 	authorizeWebsocket(channel, options) {
 		const api = this.app.getService("ApiService");
 		return {
