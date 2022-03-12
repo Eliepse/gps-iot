@@ -4,13 +4,12 @@ import {App} from 'src/App';
 import Axios from "axios";
 import fs from "fs";
 import {AuthenticationService} from 'src/services/AuthenticationService';
-import {WebsocketsService} from 'src/services/WebsocketsService';
 import dotenv from 'dotenv';
 import {ApiService} from 'src/services/ApiService';
-import {ActionsService} from 'src/services/ActionsService';
-import {GPSTrackingService} from 'src/services/GPSTrackingService';
 import path from 'path';
 import log4js from 'log4js';
+import {EventSourceService} from 'src/services/EventSourceService';
+import {ActionsService} from 'src/services/ActionsService';
 
 dotenv.config({path: path.resolve(process.cwd(), ".env")});
 log4js.configure({
@@ -58,9 +57,10 @@ if (!args.token) {
 	app.setServices(
 		ApiService,
 		AuthenticationService,
-		WebsocketsService,
-		GPSTrackingService,
-		ActionsService,
+		EventSourceService,
+		//WebsocketsService,
+		//GPSTrackingService,
+		//ActionsService,
 	);
 	app.boot();
 }

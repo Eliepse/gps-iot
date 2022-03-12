@@ -6,6 +6,9 @@ export class ApiService extends Service {
 	/** @type {import("axios").AxiosInstance} */
 	_axios;
 
+	/** @type {String} */
+	_mercureToken;
+
 	boot() {
 		this._axios = Axios.create({
 			baseURL: process.env.API_URL,
@@ -15,8 +18,31 @@ export class ApiService extends Service {
 			},
 		});
 
+		this._axios.interceptors.response.use((response) => {
+			const {'set-cookie': setCookies = []} = response.headers;
 
-		return Promise.resolve();
+			/** @type {String|undefined} */
+			const rawCookie = setCookies.find((raw) => raw.startsWith("mercureAuthorization="));
+
+			if (!rawCookie) {
+				return response;
+			}
+
+			this._mercureToken = rawCookie.match(/^mercureAuthorization=([^;]+);/)[1];
+			return response;
+		});
+
+		return new Promise((resolve, reject) => {
+			this.getTrackerInfo().then(resolve).catch(reject);
+		});
+	}
+
+	getTrackerInfo() {
+		return this.get("/api/tracker");
+	}
+
+	get mercureToken() {
+		return this._mercureToken;
 	}
 
 	createNewTraceQueue(traceId) {
