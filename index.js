@@ -6,13 +6,14 @@ import fs from "fs";
 import {ConfigsService} from 'src/services/ConfigsService';
 import {AuthenticationService} from 'src/services/AuthenticationService';
 import {WebsocketsService} from 'src/services/WebsocketsService';
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import {ApiService} from 'src/services/ApiService';
 import {ActionsService} from 'src/services/ActionsService';
 import {GPSTrackingService} from 'src/services/GPSTrackingService';
 import path from 'path';
 import log4js from 'log4js';
 
+dotenv.config({path: path.resolve(process.cwd(), ".env")});
 log4js.configure({
 	appenders: {
 		out: {type: "stdout"},
