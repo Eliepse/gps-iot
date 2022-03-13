@@ -32,9 +32,7 @@ export class ApiService extends Service {
 			return response;
 		});
 
-		return new Promise((resolve, reject) => {
-			this.getTrackerInfo().then(resolve).catch(reject);
-		});
+		return Promise.resolve();
 	}
 
 	getTrackerInfo() {
