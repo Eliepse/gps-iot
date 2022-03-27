@@ -9,6 +9,9 @@ export class ApiService extends Service {
 	/** @type {String} */
 	_mercureToken;
 
+	/** @type {{topics: String[]}} */
+	_tracker;
+
 	boot() {
 		this._axios = Axios.create({
 			baseURL: process.env.API_URL,
@@ -32,7 +35,12 @@ export class ApiService extends Service {
 			return response;
 		});
 
-		return Promise.resolve();
+		return new Promise((resolve, reject) => {
+			this.getTrackerInfo().then((res) => {
+				this._tracker = res.data;
+				resolve();
+			}).catch(reject);
+		});
 	}
 
 	getTrackerInfo() {
@@ -41,6 +49,10 @@ export class ApiService extends Service {
 
 	get mercureToken() {
 		return this._mercureToken;
+	}
+
+	get tracker() {
+		return this._tracker;
 	}
 
 	createNewTraceQueue(traceId) {

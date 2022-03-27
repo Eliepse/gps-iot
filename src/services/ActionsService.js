@@ -1,7 +1,5 @@
 import {Service} from 'src/services/Service';
-import {WebsocketsService} from 'src/services/WebsocketsService';
 import {TrackAction} from 'src/actions/TrackAction';
-import {IdleAction} from 'src/actions/IdleAction';
 import {ShutdownAction} from 'src/actions/ShutdownAction';
 
 export class ActionsService extends Service {
@@ -19,29 +17,34 @@ export class ActionsService extends Service {
 		this._actions = {
 			track: new TrackAction(this.app),
 			shutdown: new ShutdownAction(this.app),
-			idle: new IdleAction(this.app),
 		};
 
-		/** @type {WebsocketsService} */
-		const ws = this.app.getService("WebsocketsService");
+		/** @type {EventSourceService} */
+		const es = this.app.getService("EventSourceService");
 
-		ws.controlChannel.notification(({type, ...data}) => {
-			switch (type) {
-				case 'App\\Notifications\\tracker\\StartTrackerNotification':
-					this.act("track", data);
-					return;
-				case 'App\\Notifications\\tracker\\StopTrackerNotification':
-					this.act("idle", data);
-					return;
-				case 'App\\Notifications\\tracker\\ShutdownTrackerNotification':
-					this.act("shutdown", data);
-					return;
-			}
-
-			this.stopCurrent();
+		es.listen((payload) => {
+			this.app.logger.debug(payload);
 		});
 
-		return this._checkRecoveredData();
+		//ws.controlChannel.notification(({type, ...data}) => {
+		//	switch (type) {
+		//		case 'App\\Notifications\\tracker\\StartTrackerNotification':
+		//			this.act("track", data);
+		//			return;
+		//		case 'App\\Notifications\\tracker\\StopTrackerNotification':
+		//			this.act("idle", data);
+		//			return;
+		//		case 'App\\Notifications\\tracker\\ShutdownTrackerNotification':
+		//			this.act("shutdown", data);
+		//			return;
+		//	}
+		//
+		//	this.stopCurrent();
+		//});
+
+		this.act("track");
+		return Promise.resolve();
+		//return this._checkRecoveredData();
 	}
 
 	act(actionName, data) {
@@ -61,26 +64,20 @@ export class ActionsService extends Service {
 		}
 	}
 
-	_checkRecoveredData() {
-		/** @type {ApiService} */
-		const api = this.app.getService("ApiService");
-
-		return new Promise((resolve) => {
-			api.get("/api/recoverData").then((res) => {
-				if (res.status === 204) {
-					this.act("idle");
-					resolve();
-					return;
-				}
-
-				this.act("track", {traceId: res.data.trace.id});
-				resolve();
-			}).catch((err) => {
-				this.app.logger.error("Failed getting recovered data.", err);
-				this.act("idle");
-				// Resolve as it's not a breaking error
-				resolve();
-			});
-		});
-	}
+	//_checkRecoveredData() {
+	//	/** @type {ApiService} */
+	//	const api = this.app.getService("ApiService");
+	//
+	//	return new Promise((resolve) => {
+	//		api.get("/api/recoverData").then(() => {
+	//			this.act("track");
+	//			resolve();
+	//		}).catch((err) => {
+	//			this.app.logger.error("Failed getting recovered data.", err);
+	//			this.act("track");
+	//			// Resolve as it's not a breaking error
+	//			resolve();
+	//		});
+	//	});
+	//}
 }
