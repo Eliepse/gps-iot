@@ -8,6 +8,8 @@ import {ApiService} from 'src/services/ApiService';
 import path from 'path';
 import log4js from 'log4js';
 import {EventSourceService} from 'src/services/EventSourceService';
+import {GPSTrackingService} from 'src/services/GPSTrackingService';
+import {ActionsService} from 'src/services/ActionsService';
 
 dotenv.config({path: path.resolve(process.cwd(), ".env")});
 log4js.configure({
@@ -55,8 +57,8 @@ if (!args.token) {
 	app.setServices(
 		ApiService,
 		EventSourceService,
-		//GPSTrackingService,
-		//ActionsService,
+		GPSTrackingService,
+		ActionsService,
 	);
 	app.boot();
 }
