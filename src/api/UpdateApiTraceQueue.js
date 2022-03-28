@@ -63,7 +63,7 @@ export class UpdateApiTraceQueue {
 		this._pending = [];
 		this._sending.push(...statesToSend);
 
-		this._api.post(`/api/traces/${this._traceId}/coordinates`, this.toPostData(statesToSend))
+		this._api.post(`/api/tracker/self-update`, this.toPostData(statesToSend))
 			.catch((e) => {
 				this.app.logger.error("Failed updating trace", this.app.logger.parseAxiosErrorResponse(e));
 				this._pending.push(...statesToSend);
