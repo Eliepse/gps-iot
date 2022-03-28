@@ -1,7 +1,4 @@
 export class UpdateApiTraceQueue {
-	/** @type {Number} */
-	_traceId;
-
 	/** @type {ApiService} */
 	_api;
 
@@ -19,13 +16,11 @@ export class UpdateApiTraceQueue {
 
 	/**
 	 * @param {App} app
-	 * @param {String|Number} traceId
 	 * @param {Number} delay - the delay to wait before each attempt to update the Api
 	 */
-	constructor(app, traceId, delay) {
+	constructor(app, delay) {
 		this.app = app;
 		this._api = app.getService("ApiService");
-		this._traceId = traceId;
 		this._delay = delay;
 	}
 

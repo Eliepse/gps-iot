@@ -55,8 +55,8 @@ export class ApiService extends Service {
 		return this._tracker;
 	}
 
-	createNewTraceQueue(traceId) {
-		return new UpdateApiTraceQueue(this.app, traceId, 4000);
+	createNewTraceQueue() {
+		return new UpdateApiTraceQueue(this.app, 4000);
 	}
 
 	get(...params) {

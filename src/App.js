@@ -2,12 +2,6 @@ import {Service} from 'src/services/Service';
 import {LoggerService} from 'src/services/LoggerService';
 import log4js from 'log4js';
 
-const STATE = {
-	init: 0,
-	connecting: 1,
-	idle: 2,
-	tracking: 3,
-};
 const logger = log4js.getLogger();
 
 export class App {

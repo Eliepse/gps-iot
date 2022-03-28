@@ -42,7 +42,7 @@ export class TrackerManager {
 	updateListeners(data) {
 		const state = new GPSState(data);
 
-		if (!data.time || !data.lon || !data.lat) {
+		if (!data.time) {
 			return;
 		}
 
