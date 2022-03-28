@@ -76,9 +76,22 @@ export class UpdateApiTraceQueue {
 			.finally(() => this._sending = []);
 	}
 
+	/**
+	 *
+	 * @param {GPSState[]} states
+	 * @returns {{satellites: {visible: Number=, active: Number=}, coordinates: Object[]}}
+	 */
 	toPostData(states) {
+		/** @type {GPSState} */
+		const lastState = states[states.length - 1];
+		const statesWithCoordinates = states.filter((state) => state.coordinate.valid());
+
 		return {
-			segment: states.map((state) => state.toPostData()),
+			coordinates: statesWithCoordinates.map((state) => state.toPostData()) || [],
+			satellites: {
+				visible: lastState.satsVisible?.length,
+				active: lastState.satsActive?.length,
+			},
 		};
 	}
 }

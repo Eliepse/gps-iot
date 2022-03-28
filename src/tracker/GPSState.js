@@ -52,11 +52,23 @@ export class GPSState {
 		return this._pdop;
 	}
 
+	get satsVisible() {
+		return this._satsVisible;
+	}
+
+	get satsActive() {
+		return this._satsActive;
+	}
+
 	toPostData() {
 		return {
 			lon: this._coordinate.lon,
 			lat: this._coordinate.lat,
 			time: this._time.getTime() / 1000,
+			satellites: {
+				visible: this._satsVisible,
+				active: this._satsActive,
+			},
 			precision: this._pdop,
 		};
 	}
