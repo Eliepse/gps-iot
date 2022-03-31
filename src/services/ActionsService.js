@@ -23,7 +23,7 @@ export class ActionsService extends Service {
 		const es = this.app.getService("EventSourceService");
 
 		es.listen((payload) => {
-			this.app.logger.debug(payload);
+			//this.app.logger.debug(payload);
 		});
 
 		//ws.controlChannel.notification(({type, ...data}) => {

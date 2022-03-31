@@ -32,7 +32,7 @@ export class EventSourceService extends Service {
 
 		if (this.app.isDev()) {
 			this.listen((payload) => {
-				this.app.logger.debug("EventSource received a message: ", payload);
+				this.app.logger.debug("EventSource received a message: ", payload.event);
 			});
 		}
 

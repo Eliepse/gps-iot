@@ -21,6 +21,7 @@
     "node-args": "^2.1.8",
     "pusher-js": "^7.0.3",
     "serialport": "^9.2.8",
+    "simplex-noise": "^3.0.1",
     "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
