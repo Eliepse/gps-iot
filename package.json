@@ -16,13 +16,10 @@
     "dotenv": "^14.2.0",
     "eventsource": "^2.0.0",
     "gps": "^0.6.0",
-    "laravel-echo": "^1.11.3",
     "log4js": "^6.4.1",
     "node-args": "^2.1.8",
-    "pusher-js": "^7.0.3",
     "serialport": "^9.2.8",
-    "simplex-noise": "^3.0.1",
-    "socket.io-client": "^4.4.1"
+    "simplex-noise": "^3.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
