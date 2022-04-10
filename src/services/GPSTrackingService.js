@@ -32,6 +32,7 @@ export class GPSTrackingService extends Service {
 					time: new Date(),
 					satsActive: Array(Math.round(Math.random() * 4)).fill({}),
 					satsVisible: Array(Math.round(Math.random() * 12)).fill({}),
+					pdop: 1 + (Math.random() * 5),
 				});
 				listeners.forEach((listener) => listener.updateState(state));
 				setTimeout(fakeUpdate, Math.round(1500 + Math.random() * 1000));

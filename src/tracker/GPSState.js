@@ -15,7 +15,6 @@ export class GPSState {
 
 	_track;
 	_satsVisible;
-	_pdop;
 
 	/**
 	 * @param {Date} time - Current time
@@ -26,15 +25,15 @@ export class GPSState {
 	 * @param {Number} speed - Speed over ground in km/h
 	 * @param {Number} track - Track in degrees
 	 * @param {Object[]} satsVisible - Array of all visible satellites
+	 * @param {Number} pdop
 	 */
 	constructor({time, lon, lat, alt, satsActive, speed, track, satsVisible, pdop}) {
 		this._time = time;
-		this._coordinate = new Coordinate(lat, lon, alt);
+		this._coordinate = new Coordinate(lat, lon, alt, pdop);
 		this._satsActive = satsActive;
 		this._speed = speed;
 		this._track = track;
 		this._satsVisible = satsVisible;
-		this._pdop = pdop;
 	}
 
 	get time() {
@@ -49,7 +48,7 @@ export class GPSState {
 	}
 
 	get precision() {
-		return this._pdop;
+		return this._coordinate.pdop;
 	}
 
 	get satsVisible() {
@@ -69,7 +68,7 @@ export class GPSState {
 				visible: this._satsVisible,
 				active: this._satsActive,
 			},
-			precision: this._pdop,
+			precision: this.coordinate.pdop,
 		};
 	}
 }

@@ -3,10 +3,20 @@ export class Coordinate {
 	lon = 0.0;
 	altitude = 0.0;
 
-	constructor(latitude, longitude, altitude) {
+	/**
+	 * The dilution of precision.
+	 * Factor of inaccuracy to multiply with the
+	 * sensor precision given by the manufacturer.
+	 *
+	 * @type {Number}
+	 */
+	pdop = 1.0;
+
+	constructor(latitude, longitude, altitude, pdop = 1.0) {
 		this.lat = latitude;
 		this.lon = longitude;
 		this.altitude = altitude;
+		this.pdop = pdop;
 	}
 
 	valid() {
