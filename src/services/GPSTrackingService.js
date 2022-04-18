@@ -17,7 +17,7 @@ export class GPSTrackingService extends Service {
 
 	boot() {
 		// Fake manager on dev env
-		if (process.env.APP_ENV === "dev") {
+		if (process.env.FAKE_DATA === "1") {
 			const listeners = [];
 			const simplex = new SimplexNoise();
 

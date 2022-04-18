@@ -17,7 +17,6 @@ export class ApiService extends Service {
 			baseURL: process.env.API_URL,
 			headers: {
 				Authorization: `Bearer ${this.app._token}`,
-				XDEBUG_TRIGGER: 1,
 			},
 		});
 
