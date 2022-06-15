@@ -22,6 +22,8 @@ log4js.configure({
 	},
 });
 
+/** @var {App} app */
+export let app;
 const logger = log4js.getLogger();
 
 if (!process.env.TRACKER_UID) {
@@ -53,7 +55,7 @@ if (!args.token) {
 	const tokenPath = path.resolve(process.cwd(), ".token");
 	const token = fs.existsSync(tokenPath) ? fs.readFileSync(tokenPath).toString().trim() : null;
 
-	const app = new App(process.env.TRACKER_UID, token);
+	app = new App(process.env.TRACKER_UID, token);
 	app.setServices(
 		ApiService,
 		EventSourceService,
