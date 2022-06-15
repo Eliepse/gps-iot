@@ -1,5 +1,6 @@
 import GPS from 'gps';
 import {GPSState} from 'src/tracker/GPSState';
+import {app} from 'index';
 
 export class TrackerManager {
 	_gps;
@@ -28,7 +29,13 @@ export class TrackerManager {
 		(node:796) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 		 *
 		 */
-		port.on("data", (data) => this._gps.updatePartial(data));
+		port.on("data", (data) => {
+			try {
+				this._gps.updatePartial(data);
+			} catch (e) {
+				app.logger.error(e);
+			}
+		});
 		this._gps.on("data", () => this.updateListeners(this._gps.state));
 	}
 
