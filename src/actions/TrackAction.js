@@ -22,7 +22,7 @@ export class TrackAction extends Action {
 			}
 			this._queue.add(state);
 			this.app.logger.debug(state.coordinate.toString());
-		});
+		}, { delay: 1000 });
 		tracking.manager.addListener(this._listener);
 	}
 
