@@ -31,7 +31,7 @@ export class TrackerManager {
 		 */
 		port.on("data", (data) => {
 			try {
-				this._gps.updatePartial(data);
+				return this._gps.updatePartial(data);
 			} catch (e) {
 				app.logger.error(e);
 			}
