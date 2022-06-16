@@ -95,6 +95,7 @@ export class App {
 
 		const bootNext = () => {
 			if (i >= this._services.order.length) {
+				this.logger.info("Booted");
 				return;
 			}
 			const serviceName = this._services.order[i];
